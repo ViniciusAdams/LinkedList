@@ -30,6 +30,15 @@ public class LinkedList {
         node.next = getNewNode(val);
         return firstNode;
     }
+    //Adding a method to insert a new element in the front as a root
+    public Node insertFront (int i ,Node node){
+        Node a= getNewNode(i);
+        a.next = node;
+
+        return a;
+    }
+
+
     //PrintList method printing the LinkedList using a simple while loop .next
     public void printList(Node node) {
         if(node == null) {
