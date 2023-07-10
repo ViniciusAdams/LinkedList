@@ -30,6 +30,32 @@ public class LinkedList {
         node.next = getNewNode(val);
         return firstNode;
     }
+   public Node insertAtPosition (int i,int position, Node node) {
+       if (position < 0) {
+           System.out.println("Position can't be less than 1");
+       }
+
+       if (node == null && position > 1) {
+           System.out.println("Position is greater than element exists");
+           return node;
+       }
+
+       if (node == null && position == 1) {
+           return getNewNode(i);
+       }
+
+       if (position == 1) {
+           Node newNode = getNewNode(i);
+           newNode.next = node;
+           return newNode;
+       }
+
+       node.next = insertAtPosition(i, position - 1, node.next);
+       return node;
+   }
+
+
+
     //Adding a method to insert a new element in the front as a root
     public Node insertFront (int i ,Node node){
         Node a= getNewNode(i);
