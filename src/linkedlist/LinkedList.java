@@ -15,6 +15,21 @@ public class LinkedList {
 
         return newNode;
     }
+    //adding new delete method
+    public Node delete(Node node) {
+        if (node == null || node.next == null) {
+            return null;
+        }
+
+        Node tmp = node;
+
+        while(tmp.next.next != null) {
+            tmp = tmp.next;
+        }
+
+        tmp.next = null;
+        return node;
+    }
     //insert method inserting Nodes using the previous getNewNODE method.
     public Node insert(Node node, int val) {
         if(node == null) {
