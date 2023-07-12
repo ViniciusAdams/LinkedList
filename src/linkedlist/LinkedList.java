@@ -68,7 +68,13 @@ public class LinkedList {
        node.next = insertAtPosition(i, position - 1, node.next);
        return node;
    }
+    public Node deleteFront(Node node) {
+        if (node == null) {
+            return null;
+        }
 
+        return node.next;
+    }
 
 
     //Adding a method to insert a new element in the front as a root
