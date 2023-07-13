@@ -84,6 +84,25 @@ public class LinkedList {
 
         return a;
     }
+   //adding new method to delete at certain position
+    public Node deleteAtPosition(int position, Node node) {
+        if(position < 0) {
+            System.out.println("Not a valid position");
+            return node;
+        }
+
+        if(node == null && position > 0) {
+            System.out.println("Position not valid");
+            return node;
+        }
+
+        if(position == 1) {
+            return node.next;
+        }
+
+        node.next = deleteAtPosition(position - 1, node.next);
+        return node;
+    }
 
 
     //PrintList method printing the LinkedList using a simple while loop .next
