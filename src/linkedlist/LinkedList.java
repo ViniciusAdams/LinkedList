@@ -46,10 +46,11 @@ public class LinkedList {
         return firstNode;
     }
    public Node insertAtPosition (int i,int position, Node node) {
+      //first case checking if position is less than 1
        if (position < 0) {
            System.out.println("Position can't be less than 1");
        }
-
+        //second case checking if position is bigger than the element
        if (node == null && position > 1) {
            System.out.println("Position is greater than element exists");
            return node;
@@ -80,6 +81,7 @@ public class LinkedList {
     //Adding a method to insert a new element in the front as a root
     public Node insertFront (int i ,Node node){
         Node a= getNewNode(i);
+        //next pointing to the root
         a.next = node;
 
         return a;
@@ -103,7 +105,13 @@ public class LinkedList {
         node.next = deleteAtPosition(position - 1, node.next);
         return node;
     }
+    public int getSizeOfList(Node node) {
+        if(node == null) {
+            return 0;
+        }
 
+        return 1 + getSizeOfList(node.next);
+    }
 
     //PrintList method printing the LinkedList using a simple while loop .next
     public void printList(Node node) {
@@ -125,12 +133,7 @@ public class LinkedList {
             LinkedList obj = new LinkedList();
             Node head = null;
 
-            head = obj.insert(head, 12);
-            head = obj.insert(head, 7);
-            head = obj.insert(head, 8);
-            head = obj.insert(head, 10);
 
-            obj.printList(head);
 
         }
 
