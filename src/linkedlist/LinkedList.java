@@ -6,7 +6,13 @@ class Node {
     Node next;
 }
 public class LinkedList {
+    public int getSizeOfList(Node node) {
+        if(node == null) {
+            return 0;
+        }
 
+        return 1 + getSizeOfList(node.next);
+    }
     //get new Node method in order to get New Nodes in the Linked list
     private Node getNewNode(int val) {
         Node newNode = new Node();
@@ -86,6 +92,7 @@ public class LinkedList {
 
         return a;
     }
+
    //adding new method to delete at certain position
     public Node deleteAtPosition(int position, Node node) {
         if(position < 0) {
@@ -118,6 +125,7 @@ public class LinkedList {
         if(node == null) {
             return;
         }
+
 
         while(node != null) {
             System.out.print(node.data + " ");
