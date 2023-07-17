@@ -13,6 +13,18 @@ public class LinkedList {
 
         return 1 + getSizeOfList(node.next);
     }
+    public boolean ifNodeExists(int val, Node node) {
+        if (node == null) {
+            return false;
+        }
+        while (node != null) {
+            if (node.data == val) {
+                return true;
+            }
+            node = node.next;
+        }
+        return false;
+    }
     //get new Node method in order to get New Nodes in the Linked list
     private Node getNewNode(int val) {
         Node newNode = new Node();
@@ -112,13 +124,7 @@ public class LinkedList {
         node.next = deleteAtPosition(position - 1, node.next);
         return node;
     }
-    public int getSizeOfList(Node node) {
-        if(node == null) {
-            return 0;
-        }
 
-        return 1 + getSizeOfList(node.next);
-    }
 
     //PrintList method printing the LinkedList using a simple while loop .next
     public void printList(Node node) {
@@ -138,9 +144,13 @@ public class LinkedList {
 
         public static void main(String[] args) {
 
-            LinkedList obj = new LinkedList();
+            LinkedList a = new LinkedList();
             Node head = null;
+            head = a.insert(head, 12);
+            head = a.insert(head, 39);
 
+            boolean ifExist = a.ifNodeExists(123 , head);
+            System.out.println (ifExist);
 
 
         }
