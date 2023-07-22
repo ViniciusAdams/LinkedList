@@ -7,12 +7,14 @@ class Node {
 }
 public class LinkedList {
     public int getSizeOfList(Node node) {
-        if(node == null) {
+        if (node == null) {
             return 0;
         }
 
         return 1 + getSizeOfList(node.next);
     }
+
+
     public boolean ifNodeExists(int val, Node node) {
         if (node == null) {
             return false;
@@ -25,14 +27,16 @@ public class LinkedList {
         }
         return false;
     }
+
     //get new Node method in order to get New Nodes in the Linked list
     private Node getNewNode(int val) {
         Node newNode = new Node();
         newNode.data = val;
-        newNode.next =  null;
+        newNode.next = null;
 
         return newNode;
     }
+
     //adding new delete method
     public Node delete(Node node) {
         if (node == null || node.next == null) {
@@ -41,52 +45,55 @@ public class LinkedList {
 
         Node tmp = node;
 
-        while(tmp.next.next != null) {
+        while (tmp.next.next != null) {
             tmp = tmp.next;
         }
 
         tmp.next = null;
         return node;
     }
+
     //insert method inserting Nodes using the previous getNewNODE method.
     public Node insert(Node node, int val) {
-        if(node == null) {
+        if (node == null) {
             return getNewNode(val);
         }
 
         Node firstNode = node;
 
-        while(node.next != null) {
+        while (node.next != null) {
             node = node.next;
         }
 
         node.next = getNewNode(val);
         return firstNode;
     }
-   public Node insertAtPosition (int i,int position, Node node) {
-      //first case checking if position is less than 1
-       if (position < 0) {
-           System.out.println("Position can't be less than 1");
-       }
+
+    public Node insertAtPosition(int i, int position, Node node) {
+        //first case checking if position is less than 1
+        if (position < 0) {
+            System.out.println("Position can't be less than 1");
+        }
         //second case checking if position is bigger than the element
-       if (node == null && position > 1) {
-           System.out.println("Position is greater than element exists");
-           return node;
-       }
+        if (node == null && position > 1) {
+            System.out.println("Position is greater than element exists");
+            return node;
+        }
 
-       if (node == null && position == 1) {
-           return getNewNode(i);
-       }
+        if (node == null && position == 1) {
+            return getNewNode(i);
+        }
 
-       if (position == 1) {
-           Node newNode = getNewNode(i);
-           newNode.next = node;
-           return newNode;
-       }
+        if (position == 1) {
+            Node newNode = getNewNode(i);
+            newNode.next = node;
+            return newNode;
+        }
 
-       node.next = insertAtPosition(i, position - 1, node.next);
-       return node;
-   }
+        node.next = insertAtPosition(i, position - 1, node.next);
+        return node;
+    }
+
     public Node deleteFront(Node node) {
         if (node == null) {
             return null;
@@ -97,27 +104,27 @@ public class LinkedList {
 
 
     //Adding a method to insert a new element in the front as a root
-    public Node insertFront (int i ,Node node){
-        Node a= getNewNode(i);
+    public Node insertFront(int i, Node node) {
+        Node a = getNewNode(i);
         //next pointing to the root
         a.next = node;
 
         return a;
     }
 
-   //adding new method to delete at certain position
+    //adding new method to delete at certain position
     public Node deleteAtPosition(int position, Node node) {
-        if(position < 0) {
+        if (position < 0) {
             System.out.println("Not a valid position");
             return node;
         }
 
-        if(node == null && position > 0) {
+        if (node == null && position > 0) {
             System.out.println("Position not valid");
             return node;
         }
 
-        if(position == 1) {
+        if (position == 1) {
             return node.next;
         }
 
@@ -128,12 +135,12 @@ public class LinkedList {
 
     //PrintList method printing the LinkedList using a simple while loop .next
     public void printList(Node node) {
-        if(node == null) {
+        if (node == null) {
             return;
         }
 
 
-        while(node != null) {
+        while (node != null) {
             System.out.print(node.data + " ");
 
             node = node.next;
@@ -149,13 +156,18 @@ public class LinkedList {
             head = a.insert(head, 12);
             head = a.insert(head, 39);
 
-            boolean ifExist = a.ifNodeExists(123 , head);
-            System.out.println (ifExist);
+            boolean ifExist = a.ifNodeExists(123, head);
+            System.out.println(ifExist);
 
 
         }
 
+        public Node rotateAntiClockwise(int k, Node node) {
+            if (node == null || k < 0) {
+                return node;
+            }
+
+        }
     }
 }
-
 
