@@ -161,6 +161,21 @@ public class LinkedList {
 
 
         }
+        public Node middleNode(Node node) {
+            if(node == null) {
+                return null;
+            }
+
+            Node a = node;
+            Node b = node.next;
+
+            while(b != null && b.next != null) {
+                a = a.next;
+                b = b.next.next;
+            }
+
+            return a;
+        }
 
         public Node rotateAntiClockwise(int k, Node node) {
             if (node == null || k < 0) {
