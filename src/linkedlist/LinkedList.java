@@ -1,59 +1,14 @@
-//changing a few methods adding a new one and commenting
 package linkedlist;
+
 //class Node int data and Node next
 class Node {
     int data;
     Node next;
 }
+
 public class LinkedList {
-    public int getSizeOfList(Node node) {
-        if (node == null) {
-            return 0;
-        }
 
-        return 1 + getSizeOfList(node.next);
-    }
-
-
-    public boolean ifNodeExists(int val, Node node) {
-        if (node == null) {
-            return false;
-        }
-        while (node != null) {
-            if (node.data == val) {
-                return true;
-            }
-            node = node.next;
-        }
-        return false;
-    }
-
-    //get new Node method in order to get New Nodes in the Linked list
-    private Node getNewNode(int val) {
-        Node newNode = new Node();
-        newNode.data = val;
-        newNode.next = null;
-
-        return newNode;
-    }
-
-    //adding new delete method
-    public Node delete(Node node) {
-        if (node == null || node.next == null) {
-            return null;
-        }
-
-        Node tmp = node;
-
-        while (tmp.next.next != null) {
-            tmp = tmp.next;
-        }
-
-        tmp.next = null;
-        return node;
-    }
-
-    //insert method inserting Nodes using the previous getNewNODE method.
+    // Method to insert a new Node at the end of the LinkedList
     public Node insert(Node node, int val) {
         if (node == null) {
             return getNewNode(val);
@@ -69,120 +24,109 @@ public class LinkedList {
         return firstNode;
     }
 
-    public Node insertAtPosition(int i, int position, Node node) {
-        //first case checking if position is less than 1
-        if (position < 0) {
-            System.out.println("Position can't be less than 1");
-        }
-        //second case checking if position is bigger than the element
-        if (node == null && position > 1) {
-            System.out.println("Position is greater than element exists");
-            return node;
-        }
-
-        if (node == null && position == 1) {
-            return getNewNode(i);
-        }
-
-        if (position == 1) {
-            Node newNode = getNewNode(i);
-            newNode.next = node;
-            return newNode;
-        }
-
-        node.next = insertAtPosition(i, position - 1, node.next);
-        return node;
-    }
-
-    public Node deleteFront(Node node) {
+    // Method to check if a node with the given value exists in the LinkedList
+    public boolean ifNodeExists(int val, Node node) {
         if (node == null) {
-            return null;
+            return false;
         }
-
-        return node.next;
+        while (node != null) {
+            if (node.data == val) {
+                return true;
+            }
+            node = node.next;
+        }
+        return false;
     }
 
-
-    //Adding a method to insert a new element in the front as a root
-    public Node insertFront(int i, Node node) {
-        Node a = getNewNode(i);
-        //next pointing to the root
-        a.next = node;
-
-        return a;
+    // Method to create a new Node with the given value
+    private Node getNewNode(int val) {
+        Node newNode = new Node();
+        newNode.data = val;
+        newNode.next = null;
+        return newNode;
     }
 
-    //adding new method to delete at certain position
-    public Node deleteAtPosition(int position, Node node) {
-        if (position < 0) {
-            System.out.println("Not a valid position");
-            return node;
-        }
+    // Method to merge two sorted LinkedLists
+    public Node merge(Node a, Node b) {
+        Node temp = new Node();
+        Node finalList = temp;
 
-        if (node == null && position > 0) {
-            System.out.println("Position not valid");
-            return node;
+        while (a != null && b != null) {
+            if (a.data < b.data) {
+                temp.next = a;
+                a = a.next;
+            } else {
+                temp.next = b;
+                b = b.next;
+            }
+            temp = temp.next;
         }
-
-        if (position == 1) {
-            return node.next;
-        }
-
-        node.next = deleteAtPosition(position - 1, node.next);
-        return node;
+        temp.next = (a == null) ? b : a;
+        return finalList.next;
     }
 
-
-    //PrintList method printing the LinkedList using a simple while loop .next
+    // Method to print the elements of the LinkedList
     public void printList(Node node) {
         if (node == null) {
             return;
         }
 
-
         while (node != null) {
             System.out.print(node.data + " ");
-
             node = node.next;
         }
     }
 
-    public class LinkedListApp {
-
-        public static void main(String[] args) {
-
-            LinkedList a = new LinkedList();
-            Node head = null;
-            head = a.insert(head, 12);
-            head = a.insert(head, 39);
-
-            boolean ifExist = a.ifNodeExists(123, head);
-            System.out.println(ifExist);
-
-
-        }
-        public Node middleNode(Node node) {
-            if(node == null) {
-                return null;
-            }
-
-            Node a = node;
-            Node b = node.next;
-
-            while(b != null && b.next != null) {
-                a = a.next;
-                b = b.next.next;
-            }
-
-            return a;
+    public Node rotateAntiClockwise(int k, Node node) {
+        if (node == null || k < 0) {
+            return node;
         }
 
-        public Node rotateAntiClockwise(int k, Node node) {
-            if (node == null || k < 0) {
-                return node;
-            }
-
+        int count = 1;
+        Node current = node;
+        while (count < k && current != null) {
+            current = current.next;
+            count++;
         }
+
+        if (current == null) {
+            return node;
+        }
+
+        Node kthNode = current;
+
+        while (current.next != null) {
+            current = current.next;
+        }
+
+        current.next = node;
+        node = kthNode.next;
+        kthNode.next = null;
+
+        return node;
+    }
+
+    public static void main(String[] args) {
+
+        LinkedList a = new LinkedList();
+        Node head = null;
+        head = a.insert(head, 12);
+        head = a.insert(head, 39);
+
+        boolean ifExist = a.ifNodeExists(123, head);
+        System.out.println(ifExist);
+
+        // Testing merge method
+        Node list1 = a.getNewNode(2);
+        list1.next = a.getNewNode(5);
+        list1.next.next = a.getNewNode(8);
+
+        Node list2 = a.getNewNode(3);
+        list2.next = a.getNewNode(6);
+        list2.next.next = a.getNewNode(9);
+
+        Node mergedList = a.merge(list1, list2);
+        System.out.println("Merged List:");
+        a.printList(mergedList);
     }
 }
-
