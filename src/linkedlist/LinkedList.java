@@ -7,7 +7,7 @@ class Node {
 }
 
 public class LinkedList {
-
+//a
     // Method to insert a new Node at the end of the LinkedList
     public Node insert(Node node, int val) {
         if (node == null) {
