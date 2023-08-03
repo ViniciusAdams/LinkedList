@@ -76,6 +76,25 @@ public class LinkedList {
             node = node.next;
         }
     }
+    public Node mergeList(Node a, Node b) {
+        return merge(mergeSort(a), mergeSort(b));
+    }
+
+    /*
+     * It'll sort linked list
+     */
+    public Node mergeSort(Node node) {
+        if(node == null || node.next == null) {
+            return node;
+        }
+        
+
+        Node middle = middleNode(node);
+        Node secondHalf = middle.next;
+        middle.next = null;
+
+        return merge(mergeSort(node), mergeSort(secondHalf));
+    }
 
     public Node rotateAntiClockwise(int k, Node node) {
         if (node == null || k < 0) {
